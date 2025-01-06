@@ -1,12 +1,18 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormEvent, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { z } from "zod";
 
 const Scheam = z.object({
-  fullName: z.string().regex(/[0-9]/ , {message:"Numbarayak Damiya Yuthumai"}).min(4, { message: "Madi Yako" }),
-  Age: z.number({invalid_type_error:"Mata Me Awasthawedi Number Pamanai Gatha Hakke"}).min(18, { message: "Madi Yako"}),
+  fullName: z
+    .string()
+    .regex(/[0-9]/, { message: "Numbarayak Damiya Yuthumai" })
+    .min(4, { message: "Madi Yako" }),
+  Age: z
+    .number({
+      invalid_type_error: "Mata Me Awasthawedi Number Pamanai Gatha Hakke",
+    })
+    .min(18, { message: "Madi Yako" }),
 });
 
 type formData = z.infer<typeof Scheam>;
@@ -16,7 +22,7 @@ const ClassForm = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<formData>({resolver: zodResolver(Scheam),mode:"onChange"});
+  } = useForm<formData>({ resolver: zodResolver(Scheam), mode: "onChange" });
 
   return (
     <form
@@ -46,7 +52,7 @@ const ClassForm = () => {
           type="email"
           id="EmailInput"
           className="form-control"
-        //   {...register("email")}
+          //   {...register("email")}
         />
       </div>
 
@@ -58,7 +64,7 @@ const ClassForm = () => {
           type="password"
           id="Password"
           className="form-control"
-        //   {...register("password")}
+          //   {...register("password")}
         />
       </div>
 
@@ -77,11 +83,9 @@ const ClassForm = () => {
           type="text"
           id="Age"
           className="form-control"
-          {...register("Age",{valueAsNumber:true})}
+          {...register("Age", { valueAsNumber: true })}
         />
-        {errors.Age && (
-          <p className="text-danger">{errors.Age.message}</p>
-        )}
+        {errors.Age && <p className="text-danger">{errors.Age.message}</p>}
       </div>
 
       <div className="mt-4">

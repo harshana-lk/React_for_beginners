@@ -1,15 +1,15 @@
 import { useState } from "react";
 
 interface AnimalProp {
-  Heading: String;
-  Animal: String[];
-  onSelectedAnimal : (animal:String) => void;
+  Heading: string;
+  Animal: string[];
+  onSelectedAnimal: (animal: string) => void;
 }
 
 function AnimalComponent({ Animal, Heading, onSelectedAnimal }: AnimalProp) {
   const [selectedAnimal, setSelectedAnimal] = useState(Number);
 
-  const handleClick = (index: any, Animal:String) => {
+  const handleClick = (index: number, Animal: string) => {
     setSelectedAnimal(index);
     onSelectedAnimal(Animal);
   };
@@ -28,7 +28,7 @@ function AnimalComponent({ Animal, Heading, onSelectedAnimal }: AnimalProp) {
                   : "list-group-item"
               }
               onClick={() => {
-                handleClick(index, Animal)
+                handleClick(index, Animal);
               }}
             >
               {Animal}
